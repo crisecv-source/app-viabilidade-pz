@@ -3,6 +3,7 @@ import pandas as pd
 import datetime
 import plotly.graph_objects as go
 
+# Configuração da página
 st.set_page_config(page_title="Viabilidade - Allie", layout="wide")
 
 st.markdown("""
@@ -75,10 +76,11 @@ kpi3.metric("Custo Físico Base", f"R$ {custo_cub_base:,.2f}".replace(",", "X").
 
 st.divider()
 
+st.subheader("Custos e Despesas (% do VGV ou Fator CUB)")
 col_c1, col_c2, col_c3 = st.columns(3)
 
 with col_c1:
-    fator_obra = st.slider("Fator de Obra (x CUB)", 0.0, 2.0, 1.0, 0.05)
+    fator_obra = st.slider("Fator de Obra (x CUB)", 0.0, 2.0, 0.0, 0.05)
     pct_despesas = st.slider("Despesas Diversas (%)", 0.0, 15.0, 0.0, 0.1) / 100
     pct_outorga = st.slider("Outorga Onerosa (%)", 0.0, 10.0, 0.0, 0.1) / 100
 
