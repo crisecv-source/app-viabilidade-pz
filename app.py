@@ -4,7 +4,7 @@ import datetime
 import plotly.graph_objects as go
 
 # Configuração inicial da página para tela cheia
-st.set_page_config(page_title="Viabilidade", layout="wide")
+st.set_page_config(page_title="Viabilidade - PZ Barra Velha", layout="wide")
 
 # ==========================================
 # ESTILO VISUAL (CSS) - INSPIRADO NO DASHBOARD
@@ -54,7 +54,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🏢 Análise de Viabilidade:")
+st.title("🏢 Análise de Viabilidade: PZ - Barra Velha")
 st.markdown("Preencha os dados na barra lateral esquerda para simular os indicadores e o fluxo do caixa do empreendimento.")
 
 # ==========================================
@@ -165,7 +165,8 @@ st.subheader("📉 Custos e VGV Líquido")
 col_c1, col_c2, col_c3 = st.columns(3)
 
 with col_c1:
-    pct_obra = st.slider("Obra (% do VGV)", 0.0, 80.0, 40.0, 0.5) / 100
+    # A MUDANÇA ESTÁ AQUI: Agora usamos o Fator de Obra baseado no CUB
+    fator_obra = st.slider("Fator de Obra (x CUB)", 0.5, 2.0, 1.2, 0.05)
     pct_despesas = st.slider("Despesas Diversas (%)", 0.0, 15.0, 2.0, 0.1) / 100
     pct_outorga = st.slider("Outorga Onerosa (%)", 0.0, 10.0, 1.0, 0.1) / 100
 
@@ -179,8 +180,9 @@ with col_c3:
     pct_adm = st.slider("Administração/Controle (%)", 0.0, 10.0, 3.0, 0.1) / 100
     pct_financeiro = st.slider("Custo Financeiro (%)", 0.0, 15.0, 1.5, 0.1) / 100
 
+# Atualizando o cálculo da Obra para CUB * Área * Fator
 custos_totais = {
-    "Obra": vgv_total * pct_obra,
+    "Obra": area_construida * cub * fator_obra,
     "Despesas": vgv_total * pct_despesas,
     "Outorga": vgv_total * pct_outorga,
     "Monitoramento/Medição": vgv_total * pct_monitoramento,
