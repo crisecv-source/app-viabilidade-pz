@@ -3,9 +3,9 @@ import pandas as pd
 import datetime
 import plotly.graph_objects as go
 
-#st.set_page_config(page_title="Viabilidade - Allie", layout="wide")
+st.set_page_config(page_title="Viabilidade - Allie", layout="wide")
 
-#st.markdown("""
+st.markdown("""
 <style>
     .stApp { background-color: #12141E; }
     [data-testid="stSidebar"] { background-color: #1A1D2A; border-right: 1px solid #2B2F42; }
@@ -26,7 +26,7 @@ import plotly.graph_objects as go
 st.title("🏢 Análise de Viabilidade: Allie Empreendimentos")
 st.markdown("Preencha os dados na barra lateral para iniciar a simulação.")
 
-#st.sidebar.header("1. Quadro de Áreas (m²)")
+st.sidebar.header("1. Quadro de Áreas (m²)")
 area_construida = st.sidebar.number_input("Área Total Construída", min_value=0.0, value=0.0, step=100.0)
 area_privativa = st.sidebar.number_input("Área Privativa (Residencial)", min_value=0.0, value=0.0, step=100.0)
 area_comercial = st.sidebar.number_input("Área Comercial (Mall)", min_value=0.0, value=0.0, step=100.0)
@@ -56,7 +56,7 @@ pct_entrada = st.sidebar.number_input("Sinal/Entrada (%)", min_value=0.0, max_va
 pct_mensais = st.sidebar.number_input("Parcelas Mensais (%)", min_value=0.0, max_value=100.0, value=0.0, step=1.0)
 pct_chaves = st.sidebar.number_input("Financiamento/Chaves (%)", min_value=0.0, max_value=100.0, value=0.0, step=1.0)
 
-#if area_construida > 0:
+if area_construida > 0:
     pct_privativa = (area_privativa / area_construida) * 100
 else:
     pct_privativa = 0.0
@@ -67,7 +67,6 @@ vgv_permuta = area_permuta * venda_resid_m2
 vgv_locacao = area_locacao * locacao_m2 * 100 
 vgv_total = vgv_residencial + vgv_comercial + vgv_permuta + vgv_locacao
 
-#st.subheader("🏆 Principais Indicadores")
 kpi1, kpi2, kpi3 = st.columns(3)
 kpi1.metric("VGV TOTAL ESTIMADO", f"R$ {vgv_total:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
 kpi2.metric("Eficiência do Projeto", f"{pct_privativa:.1f}%")
@@ -76,7 +75,6 @@ kpi3.metric("Custo Físico Base", f"R$ {custo_cub_base:,.2f}".replace(",", "X").
 
 st.divider()
 
-#st.subheader("📉 Custos e VGV Líquido")
 col_c1, col_c2, col_c3 = st.columns(3)
 
 with col_c1:
@@ -94,7 +92,7 @@ with col_c3:
     pct_adm = st.slider("Administração/Controle (%)", 0.0, 10.0, 0.0, 0.1) / 100
     pct_financeiro = st.slider("Custo Financeiro (%)", 0.0, 15.0, 0.0, 0.1) / 100
 
-#custos_totais = {
+custos_totais = {
     "Obra": area_construida * cub * fator_obra,
     "Despesas": vgv_total * pct_despesas,
     "Outorga": vgv_total * pct_outorga,
@@ -114,7 +112,6 @@ st.metric("VGV LÍQUIDO", f"R$ {vgv_liquido:,.2f}".replace(",", "X").replace("."
 
 st.divider()
 
-#st.subheader("📈 Fluxo de Caixa")
 if inicio_obras < entrega_obra:
     meses_projeto = pd.date_range(start=inicio_obras, end=entrega_obra, freq='MS')
     df_fc = pd.DataFrame({'Data': meses_projeto})
@@ -131,5 +128,6 @@ if inicio_obras < entrega_obra:
     st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
+
 st.subheader("📋 Quadro de Tipologias")
 st.data_editor(pd.DataFrame({"Tipologia": ["-"], "Quantidade": [0], "Área": [0.0], "Vagas": [0]}), num_rows="dynamic", use_container_width=True)
