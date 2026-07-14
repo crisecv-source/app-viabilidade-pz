@@ -4,7 +4,7 @@ import datetime
 import plotly.graph_objects as go
 
 # Configuração inicial da página para tela cheia
-st.set_page_config(page_title="Viabilidade - PZ Barra Velha", layout="wide")
+st.set_page_config(page_title="Viabilidade - ALLIE EMPREENDIMENTOS", layout="wide")
 
 # ==========================================
 # ESTILO VISUAL (CSS) - INSPIRADO NO DASHBOARD
@@ -54,7 +54,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🏢 Análise de Viabilidade: PZ - Barra Velha")
+st.title("🏢 Análise de Viabilidade: ALLIE EMPREENDIMENTOS")
 st.markdown("Preencha os dados na barra lateral esquerda para simular os indicadores e o fluxo do caixa do empreendimento.")
 
 # ==========================================
