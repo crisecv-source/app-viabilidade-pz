@@ -3,7 +3,6 @@ import pandas as pd
 import datetime
 import plotly.graph_objects as go
 
-# Configuração da página
 st.set_page_config(page_title="Viabilidade - Allie", layout="wide")
 
 st.markdown("""
@@ -46,16 +45,8 @@ st.sidebar.divider()
 
 st.sidebar.header("3. Cronograma (Datas)")
 hoje = datetime.date.today()
-inicio_vendas = st.sidebar.date_input("Início das Vendas", value=hoje)
 inicio_obras = st.sidebar.date_input("Início das Obras", value=hoje)
 entrega_obra = st.sidebar.date_input("Entrega da Obra", value=hoje)
-
-st.sidebar.divider()
-
-st.sidebar.header("4. Condições Comerciais (%)")
-pct_entrada = st.sidebar.number_input("Sinal/Entrada (%)", min_value=0.0, max_value=100.0, value=0.0, step=1.0)
-pct_mensais = st.sidebar.number_input("Parcelas Mensais (%)", min_value=0.0, max_value=100.0, value=0.0, step=1.0)
-pct_chaves = st.sidebar.number_input("Financiamento/Chaves (%)", min_value=0.0, max_value=100.0, value=0.0, step=1.0)
 
 if area_construida > 0:
     pct_privativa = (area_privativa / area_construida) * 100
